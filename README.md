@@ -17,7 +17,9 @@ At the bare minimum you'll need the following for your development environment a
 3. [Pyspark](https://pypi.org/project/pyspark/) (I have tested it on Pyspark 2.4.3)
 
 ## Local Setup
-### Dependency Mangement
+### Dependency Mangement and virtualenv for the project
+python3 -m venv env
+source env/bin/activate
 pip3 install -r requirements.txt
 
 ### Generate Dataset 1
