@@ -28,3 +28,6 @@ python3 create_dataset2.py
 
 ### Run Spark Job
 python3 spark_job.py
+
+### Run all scripts sequentially
+python3 app.py
