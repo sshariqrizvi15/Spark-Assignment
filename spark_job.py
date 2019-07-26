@@ -38,13 +38,13 @@ joined_summed_people_df = joined_people_df.join(summed_post_df, joined_people_df
     select(joined_people_df["*"], summed_post_df["total_activity"])
 
 # Write detail dataframe to parquet fil
-joined_summed_people_df.write.parquet("final_list.parquet")
+joined_summed_people_df.write.parquet("detail_report.parquet")
 joined_summed_people_df.orderBy("name").show(40)
 
 # Removed additional columns for Summarise Report
 summary_df = summarise_report(joined_summed_people_df)
 
-summary_df.write.parquet("summary.parquet")
+summary_df.write.parquet("summary_report.parquet")
 summary_df.orderBy("name").show(200)
 
 print("PySpark Job Completed.")
