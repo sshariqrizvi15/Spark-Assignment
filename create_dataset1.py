@@ -1,3 +1,7 @@
+"""
+Script to Generate data set 1
+"""
+
 import collections
 import random
 from json import dumps

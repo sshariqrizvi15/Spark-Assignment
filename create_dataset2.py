@@ -1,3 +1,6 @@
+"""
+Script to Generate data set 2
+"""
 import collections
 import random
 from json import load, dumps

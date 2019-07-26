@@ -1,17 +1,47 @@
+"""
+    spark_job is running a pyspark job to process two data sets into desirable report
+"""
+
 import pyspark
 from pyspark.sql.functions import explode, array
 
 
 def read_json(filename):
+    """Read Json File
+
+    Parameters:
+    filename (string): Name of a file
+   """
+
     return sqlContext.read.json(filename, multiLine=True)
 
 
 def outer_join_two_datasets(dataset1, dataset2):
+    """Join two datasets
+
+    Parameters:
+    dataset1 (dataframe): Dataframe with whom another will join
+    dataset2 (dataframe): Dataframe to be joined
+
+    Returns:
+    dataframe: Returning a joined dataframe
+
+   """
+
     return dataset1.join(dataset2, dataset1.name == dataset2.name, "left_outer"). \
         select(dataset1["*"], dataset2["posts"], dataset2["account"])
 
 
 def summarise_report(summed_people_df):
+    """Removing extra columns and duplicated rows
+
+    Parameters:
+    dataset1 (dataframe): Data frame to whom operation will perform
+
+    Returns:
+    dataframe: Returning a summarised data frame
+
+   """
     rel_col_df = summed_people_df.drop('phone', 'posts', 'account')
     return rel_col_df.drop_duplicates()
 
