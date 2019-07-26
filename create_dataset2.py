@@ -16,6 +16,7 @@ database = []
 filename = 'dataset2'
 count = 0
 
+# Created a list to generate a dummy data set of json which has same names has first dat set
 for x in range(67):
     for i in range(3):
         database.append(collections.OrderedDict([
@@ -25,6 +26,7 @@ for x in range(67):
         ]))
 del database[-1]
 
+# Write to a json file
 with open('%s.json' % filename, 'w') as output:
     output.write(dumps(database, indent=4))
 print("Data set 2 Created.")
