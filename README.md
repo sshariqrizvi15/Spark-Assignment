@@ -18,9 +18,13 @@ At the bare minimum you'll need the following for your development environment a
 
 ## Local Setup
 ### Dependency Mangement and virtualenv for the project
+
 python3 -m venv env
+
 source env/bin/activate
+
 pip3 install -r requirements.txt
+
 
 ### Generate Dataset 1
 python3 create_dataset1.py
