@@ -29,22 +29,21 @@ people_denorm_df = people_df.repartition('gender').select('name', 'gender', expl
 # dataset.
 joined_people_df = outer_join_two_datasets(people_df, post_df)
 
+na_fill_joined_df = joined_people_df.fillna({'posts': '0'})
 # Add column called "total activity" with sum of the "posts" field
-summed_post_df = joined_people_df.groupBy('name', 'phone').agg({'posts': 'sum'}).withColumnRenamed("SUM(posts)",
-                                                                                                   "total_activity")
+summed_post_df = na_fill_joined_df.groupBy('name', 'phone').agg({'posts': 'sum'}).withColumnRenamed("SUM(posts)",
+                                                                                                 "total_activity")
 
 # Add remaining columns which were removed due to aggregation operation
-joined_summed_people_df = joined_people_df.join(summed_post_df, joined_people_df.name == summed_post_df.name). \
-    select(joined_people_df["*"], summed_post_df["total_activity"])
+joined_summed_people_df = na_fill_joined_df.join(summed_post_df, na_fill_joined_df.name == summed_post_df.name). \
+    select(na_fill_joined_df["*"], summed_post_df["total_activity"])
 
 # Write detail dataframe to parquet fil
 joined_summed_people_df.write.parquet("detail_report.parquet")
-joined_summed_people_df.orderBy("name").show(40)
 
 # Removed additional columns for Summarise Report
 summary_df = summarise_report(joined_summed_people_df)
 
 summary_df.write.parquet("summary_report.parquet")
-summary_df.orderBy("name").show(200)
 
 print("PySpark Job Completed.")
