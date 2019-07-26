@@ -31,3 +31,16 @@ python3 spark_job.py
 
 ### Run all scripts sequentially
 python3 app.py
+
+## Output files
+### final_list.parquet
+
+Column Names
+
+| gender| name| phone| posts| account| total_activity|
+
+### summary_report.parquet
+
+Column Names
+
+| gender| name| total_activity|
